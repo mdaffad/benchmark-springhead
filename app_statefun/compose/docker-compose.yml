@@ -26,7 +26,7 @@ services:
       - "9092:9092"
       - "9644:9644"
   
-  springhead:
+  function:
     build:
       dockerfile: dockerfiles/springhead.dockerfile
       context: ..
@@ -38,8 +38,6 @@ services:
       - "./scripts/start-reload.sh"
     ports:
       - "8888:80"
-    volumes:
-      - ../springhead:/app/springhead
     env_file:
       - ../env/.env
   

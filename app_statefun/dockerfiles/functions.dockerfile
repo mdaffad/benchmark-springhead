@@ -39,7 +39,6 @@ RUN python -m nltk.downloader stopwords && \
     python -m nltk.downloader omw-1.4
 
 COPY app ./app
-COPY springhead ./springhead
 COPY scripts ./scripts
 
 CMD [ "--", "sh", "./scripts/start.sh" ]
