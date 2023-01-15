@@ -30,7 +30,8 @@ async def startup():
     logger = logging.getLogger(__name__)
     # TODO: custom process injection
     app.state.bootstrap: Bootstrap = await bootstrap(
-        custom_functions={"springhead/dummy": custom_process_logger}
+        specification_path="./app/specifications.yml",
+        custom_functions={"springhead/dummy": custom_process_logger},
     )  # type: ignore
 
     logger.info("Bootstrap is done")

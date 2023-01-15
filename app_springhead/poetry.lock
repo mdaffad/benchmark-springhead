@@ -300,7 +300,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "springhead"
-version = "0.0.2"
+version = "0.1.0"
 description = "Clustering Framework over Apache Flink Stateful Function"
 category = "main"
 optional = false
@@ -320,8 +320,8 @@ uvicorn = "^0.18.3"
 [package.source]
 type = "git"
 url = "https://github.com/mdaffad/springhead"
-reference = "v0.0.2"
-resolved_reference = "7a61fa682ccb85ad72ce7aaa914dd29acd4c7a58"
+reference = "v0.1.0"
+resolved_reference = "d4ca3db70024dcf4ec38f0575d8acaf19cd75e67"
 
 [[package]]
 name = "starlette"
@@ -389,7 +389,7 @@ standard = ["colorama (>=0.4)", "httptools (>=0.4.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "eb581a7bd519a1e9f109e65540caf23d9c0002c699865153be4f80ccd313988e"
+content-hash = "da5697cd056fd5ac67fa29b250d9bc53e1d1093735fd37781ebee52fde766778"
 
 [metadata.files]
 anyio = [
