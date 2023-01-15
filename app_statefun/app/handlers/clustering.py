@@ -1,13 +1,14 @@
 import logging
 
+from app.adapters.stateful_functions import stateful_functions
 from river.cluster import CluStream
-from springhead.models import Process
 from statefun import Context, Message
 
 logger = logging.getLogger(__name__)
 
 
-def clustream(context: Context, message: Message, process: Process) -> None:
+@stateful_functions
+def clustream(context: Context, message: Message, process: Process) -> None:  # noqa
     clustream = context.storage.clustream or None
     if not clustream:
         clustream = clustream = CluStream(

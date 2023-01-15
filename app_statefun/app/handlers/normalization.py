@@ -1,8 +1,8 @@
 import unicodedata
 
 import nltk
+from app.adapters.stateful_functions import stateful_functions
 from nltk.tokenize import word_tokenize
-from springhead.models import Process
 from statefun import Context, Message
 
 stopwords = set(nltk.corpus.stopwords.words("english"))
@@ -21,7 +21,8 @@ def lemmatize(token):
     return lemmatizer.lemmatize(token)
 
 
-def normalize(context: Context, message: Message, process: Process) -> None:
+@stateful_functions
+def normalize(context: Context, message: Message, process: Process) -> None:  # noqa
     text: str = message.as_type(process.source_type_value)  # str expected
     normalized_text = [
         lemmatize(word).lower()

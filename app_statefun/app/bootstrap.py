@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from statefun import RequestReplyHandler, StatefulFunctions
+from app.adapters.stateful_functions import stateful_functions
+from statefun import RequestReplyHandler
 
 
 @dataclass
@@ -11,6 +12,5 @@ class Bootstrap:
 
 
 async def bootstrap() -> Bootstrap:
-    stateful_functions = StatefulFunctions()
     handler = RequestReplyHandler(stateful_functions)
     return Bootstrap(handler=handler)

@@ -4,8 +4,6 @@ from fastapi import FastAPI
 from springhead.controllers import main_router
 from springhead.core import Bootstrap, bootstrap, settings
 
-from .dummy import custom_process_logger
-
 logger = logging.getLogger()
 
 app = FastAPI()
@@ -28,11 +26,7 @@ async def startup():
     init_logger(settings.log_level)
 
     logger = logging.getLogger(__name__)
-    # TODO: custom process injection
-    app.state.bootstrap: Bootstrap = await bootstrap(
-        specification_path="./app/specifications.yml",
-        custom_functions={"springhead/dummy": custom_process_logger},
-    )  # type: ignore
+    app.state.bootstrap: Bootstrap = await bootstrap()
 
     logger.info("Bootstrap is done")
 

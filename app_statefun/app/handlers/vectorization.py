@@ -1,11 +1,12 @@
 from collections import Counter
 
+from app.adapters.stateful_functions import stateful_functions
 from river.feature_extraction import TFIDF, BagOfWords
-from springhead.models import Process
 from statefun import Context, Message
 
 
-def bag_of_words(context: Context, message: Message, process: Process) -> None:
+@stateful_functions
+def bag_of_words(context: Context, message: Message, process: Process) -> None:  # noqa
     document_counter = context.storage.dfs or {}
     if not document_counter and process.model:
         document_counter = process.model.pickled_object
@@ -24,7 +25,7 @@ def bag_of_words(context: Context, message: Message, process: Process) -> None:
     process.send(target_id=process.target_id, value=request, context=context)
 
 
-def tfidf(context: Context, message: Message, process: Process) -> None:
+def tfidf(context: Context, message: Message, process: Process) -> None:  # noqa
     document_counter = context.storage.dfs or {}
     document_number = context.storage.n or 0
 
