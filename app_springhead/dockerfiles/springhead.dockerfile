@@ -1,4 +1,4 @@
-FROM python:3.9-slim AS base
+FROM python:3.9 AS base
 
 # Env variables
 ENV PYTHONUNBUFFERED=1 \
@@ -23,7 +23,14 @@ RUN bash -c "if [ $INSTALL_DEV == 'true' ] ;\
     else pip install -r requirements/requirements.txt ;\
     fi"
 
-FROM base AS runner
+FROM python:3.9-slim AS runner
+
+# Env variables
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    PATH="/opt/venv/bin:$PATH"
 
 RUN apt-get update && apt-get -y --no-install-recommends install dumb-init
 
@@ -39,9 +46,9 @@ RUN python -m nltk.downloader stopwords && \
     python -m nltk.downloader omw-1.4
 
 COPY app ./app
-COPY springhead ./springhead
 COPY scripts ./scripts
 
 CMD [ "--", "sh", "./scripts/start.sh" ]
 ENTRYPOINT ["dumb-init"]
 
+# CMD ["sleep", "3600"]

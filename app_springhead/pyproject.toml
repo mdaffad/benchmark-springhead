@@ -8,8 +8,8 @@ packages = [{include = "app_springhead"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-fastapi = "^0.89.1"
-
+springhead = {git = "https://github.com/mdaffad/springhead", tag = "v0.0.2"}
+pyyaml = "^6.0"
 
 [build-system]
 requires = ["poetry-core"]

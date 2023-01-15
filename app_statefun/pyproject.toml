@@ -8,6 +8,7 @@ packages = [{include = "app_statefun"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+apache-flink-statefun = "^3.2.0"
 fastapi = "^0.89.1"
 
 
