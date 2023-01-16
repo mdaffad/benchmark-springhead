@@ -32,3 +32,5 @@ FUNCTION_CLUSTREAM_VALUE_SPEC = ValueSpec(
 )
 
 FUNCTION_N_DOCUMENT_VALUE_SPEC = ValueSpec(name="n", type=IntType)
+
+FUNCTION_GENERAL_DICTIONARY_TYPE = make_json_type(typename="function/dictionary")

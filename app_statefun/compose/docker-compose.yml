@@ -28,14 +28,14 @@ services:
   
   function:
     build:
-      dockerfile: dockerfiles/springhead.dockerfile
+      dockerfile: dockerfiles/function.dockerfile
       context: ..
       args:
         - INSTALL_DEV=true
     command: 
       - "--"
       - "sh"
-      - "./scripts/start-reload.sh"
+      - "./scripts/start.sh"
     ports:
       - "8888:80"
     env_file:

@@ -1,43 +1,29 @@
 from collections import Counter
 
 from app.adapters.stateful_functions import stateful_functions
-from river.feature_extraction import TFIDF, BagOfWords
-from statefun import Context, Message
+from app.schemas import (
+    FUNCTION_DFS_VALUE_SPEC,
+    FUNCTION_GENERAL_DICTIONARY_TYPE,
+    FUNCTION_N_DOCUMENT_VALUE_SPEC,
+)
+from river.feature_extraction import TFIDF as RiverTFIDF
+from statefun import Context, Message, StringType, message_builder
+
+from .typename import CLUSTREAM, TFIDF
 
 
-@stateful_functions
-def bag_of_words(context: Context, message: Message, process: Process) -> None:  # noqa
-    document_counter = context.storage.dfs or {}
-    if not document_counter and process.model:
-        document_counter = process.model.pickled_object
-    else:
-        document_counter = Counter(document_counter)
-
-    bow = BagOfWords()
-
-    text = message.as_type(process.source_type_value)
-    bow = bow.transform_one(text)
-
-    dfs = dict(document_counter + bow)
-    context.storage.dfs = dfs
-
-    request = {"bag_of_words": dfs}
-    process.send(target_id=process.target_id, value=request, context=context)
-
-
-def tfidf(context: Context, message: Message, process: Process) -> None:  # noqa
+@stateful_functions.bind(
+    TFIDF, [FUNCTION_N_DOCUMENT_VALUE_SPEC, FUNCTION_DFS_VALUE_SPEC]
+)
+def tfidf(context: Context, message: Message) -> None:  # noqa
     document_counter = context.storage.dfs or {}
     document_number = context.storage.n or 0
 
-    if not document_counter and process.model and document_number == 0:
-        document_counter = process.model.pickled_object.dfs
-        document_number = process.model.pickled_object.n
-
-    tfidf = TFIDF()
+    tfidf = RiverTFIDF()
     if document_counter:
         tfidf.dfs = Counter(document_counter)
         tfidf.n = document_number
-    text = message.as_type(process.source_type_value)
+    text = message.as_type(StringType)
 
     tfidf = tfidf.learn_one(text)
 
@@ -51,4 +37,11 @@ def tfidf(context: Context, message: Message, process: Process) -> None:  # noqa
     request = {
         "vectorized_value": tfidf,
     }
-    process.send(target_id=process.target_id, value=request, context=context)
+    context.send(
+        message_builder(
+            target_typename=CLUSTREAM,
+            target_id=context.address.id,
+            value=request,
+            value_type=FUNCTION_GENERAL_DICTIONARY_TYPE,
+        )
+    )

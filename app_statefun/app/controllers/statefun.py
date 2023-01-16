@@ -20,5 +20,5 @@ async def handle(request: Request, handler: RequestReplyHandler = Depends(get_ha
         media_type="application/octet-stream",
     )
     end_time = time_ns()
-    logger.info(f"elapsed get_handler: {end_time-start_time}")
+    logger.info(f"elapsed statefun endpoint: {end_time-start_time}")
     return response
