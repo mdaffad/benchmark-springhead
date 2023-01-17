@@ -1,4 +1,5 @@
 import logging
+from time import time_ns
 
 from fastapi import FastAPI
 from springhead.controllers import main_router
@@ -28,10 +29,11 @@ async def startup():
     init_logger(settings.log_level)
 
     logger = logging.getLogger(__name__)
-    # TODO: custom process injection
+    start_time = time_ns()
     app.state.bootstrap: Bootstrap = await bootstrap(
         specification_path="./app/specifications.yml",
         custom_functions={"springhead/dummy": custom_process_logger},
     )  # type: ignore
-
+    end_time = time_ns()
+    logger.info(f"elapsed springhead bootstrap: {end_time-start_time}")
     logger.info("Bootstrap is done")

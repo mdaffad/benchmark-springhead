@@ -10,5 +10,5 @@ async def get_handler(request: Request):
     start_time = time_ns()
     handler = request.app.state.bootstrap.handler
     end_time = time_ns()
-    logger.info(f"elapsed get_handler: {end_time-start_time}")
+    logger.info(f"elapsed statefun get_handler: {end_time-start_time}")
     return handler

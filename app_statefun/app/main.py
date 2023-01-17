@@ -1,4 +1,5 @@
 import logging
+from time import time_ns
 
 from app.bootstrap import Bootstrap, bootstrap
 from app.config import settings
@@ -27,11 +28,8 @@ async def startup():
     init_logger(settings.log_level)
 
     logger = logging.getLogger(__name__)
+    start_time = time_ns()
     app.state.bootstrap: Bootstrap = await bootstrap()
-
+    end_time = time_ns()
+    logger.info(f"elapsed statefun bootstrap: {end_time-start_time}")
     logger.info("Bootstrap is done")
-
-
-# TODO: create all function
-# TODO: register all function
-# TODO: make custom type for str-no-protobuf
