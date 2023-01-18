@@ -15,7 +15,6 @@ alembic upgrade head
 """
 
 import uuid
-from dataclasses import dataclass
 
 from sqlalchemy import BigInteger, Column, DateTime, String
 from sqlalchemy.dialects.postgresql import UUID
@@ -37,7 +36,6 @@ class SpringheadTime:
 
 
 @Base.mapped
-@dataclass
 class StatefunTime:
     __tablename__ = "statefun_times"
 

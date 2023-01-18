@@ -53,4 +53,5 @@ async def startup():
         )
         logger.info(f"elapsed springhead bootstrap: {end_time-start_time}")
 
+    logger.debug(bootstrap_object.handler.functions._functions)
     logger.info("Bootstrap is done")

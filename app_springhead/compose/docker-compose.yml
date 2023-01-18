@@ -64,3 +64,9 @@ services:
     environment:
       - ROLE=worker
       - MASTER_HOST=master
+
+
+networks:
+  default:
+    name: sidecar_springhead-network
+    external: true

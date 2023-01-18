@@ -20,8 +20,6 @@ GUNICORN_CONF=${GUNICORN_CONF:?"No module name provided"}
 
 export WORKER_CLASS=${WORKER_CLASS:-"uvicorn.workers.UvicornWorker"}
 
-./scripts/start.sh
-
 # If there's a prestart.sh script in the /app/app directory
 # or other path specified, run it before starting
 PRE_START_PATH=${PRE_START_PATH:-/app/scripts/prestart.sh}

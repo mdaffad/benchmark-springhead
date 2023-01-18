@@ -64,3 +64,8 @@ services:
     environment:
       - ROLE=worker
       - MASTER_HOST=master
+
+networks:
+  default:
+    name: sidecar_function-network
+    external: true

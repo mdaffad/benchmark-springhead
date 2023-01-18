@@ -17,8 +17,8 @@ services:
       - ../env/.env
     
     networks:
-      - springhead_default
-      - function_default
+      - springhead-network
+      - function-network
     
     depends_on:
       - postgres
@@ -35,13 +35,11 @@ services:
       - "${DEFAULT_DATABASE_PORT}:5432"
 
     networks:
-      - springhead_default
-      - function_default
+      - springhead-network
+      - function-network
   
 networks:
-  springhead_default:
-    external: true
+  springhead-network:
   
-  function_default:
-    external: true
+  function-network:
       
