@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  sidecar:
+    build:
+      dockerfile: dockerfiles/sidecar.dockerfile
+      context: ..
+      args:
+        - INSTALL_DEV=true
+    command: 
+      - "--"
+      - "sh"
+      - "./scripts/start.sh"
+    ports:
+      - "8889:80"
+    env_file:
+      - ../env/.env
+  
+  postgres:
+    image: postgres:latest
+    volumes:
+      - ./default_database_data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DEFAULT_DATABASE_DB}
+      - POSTGRES_USER=${DEFAULT_DATABASE_USER}
+      - POSTGRES_PASSWORD=${DEFAULT_DATABASE_PASSWORD}
+    env_file:
+      - ../env/.env
+    ports:
+      - "${DEFAULT_DATABASE_PORT}:5432"

@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "sidecar"
+version = "0.1.0"
+description = "Springhead Benchmark's sidecar service"
+authors = ["Muhammad Daffa Dinaya <13518141@std.stei.itb.ac.id>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.89.1"
+sqlalchemy = "^1.4.46"
+asyncpg = "^0.27.0"
+alembic = "^1.9.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
