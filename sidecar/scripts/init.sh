@@ -1,5 +1,7 @@
 #!/bin/bash
+ls
 
+echo $BACKEND_CORS_ORIGINS
 echo "Run migrations"
 alembic upgrade head
 

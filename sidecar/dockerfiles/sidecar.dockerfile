@@ -38,8 +38,6 @@ COPY alembic ./alembic
 COPY alembic.ini .
 COPY scripts ./scripts
 
-RUN scripts/init.sh
-
 CMD [ "--", "sh", "./scripts/start.sh" ]
 ENTRYPOINT ["dumb-init"]
 

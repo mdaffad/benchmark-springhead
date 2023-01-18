@@ -389,7 +389,7 @@ standard = ["colorama (>=0.4)", "httptools (>=0.4.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "13d7fa6d0af1f8b861c82032b388887b56ef4b354cbb14aea08c6f83a0e9348c"
+content-hash = "623c29eddf8956e2b60d45ce4abd4451e32a4331370eef26ad8467516e99afb3"
 
 [metadata.files]
 anyio = [

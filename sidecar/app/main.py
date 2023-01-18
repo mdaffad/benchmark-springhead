@@ -7,12 +7,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 logger = logging.getLogger()
 
-app = FastAPI()
-app.include_router(
-    api_router,
+app = FastAPI(
     title=settings.PROJECT_NAME,
     openapi_url="/openapi.json",
     docs_url="/",
+)
+app.include_router(
+    api_router,
 )
 
 # Sets all CORS enabled origins
