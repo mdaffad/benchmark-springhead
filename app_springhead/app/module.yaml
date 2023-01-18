@@ -14,7 +14,7 @@ spec:
     - topic: message-topic
       valueType: springhead/text
       targets:
-        - springhead/dummy
+        - springhead/normalization
 ---
 kind: io.statefun.kafka.v1/egress
 spec:

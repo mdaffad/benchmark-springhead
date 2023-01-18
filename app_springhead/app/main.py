@@ -6,7 +6,6 @@ from fastapi import FastAPI
 from springhead.controllers import main_router
 from springhead.core import Bootstrap, bootstrap, settings
 
-from .dummy import custom_process_logger
 from .schemas import SpringheadTimeCreateRequest
 
 logger = logging.getLogger()
@@ -34,7 +33,6 @@ async def startup():
     start_time = time_ns()
     app.state.bootstrap: Bootstrap = await bootstrap(
         specification_path="./app/specifications.yml",
-        custom_functions={"springhead/dummy": custom_process_logger},
         side_car_address="http://sidecar/springhead/",
         type_test_case="all-combination",
         benchmark_mode=True,
