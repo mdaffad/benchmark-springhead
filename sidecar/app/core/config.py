@@ -26,8 +26,6 @@ class Settings(BaseSettings):
 
     @validator("log_level")
     def validate_log_level(cls, level: str, values: dict[str, str]):
-        print("Here what you get")
-        print(values)
         return level.upper()
 
     # VALIDATORS
