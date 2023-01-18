@@ -1,3 +1,4 @@
+from .requests import StatefunTimeCreateRequest
 from .text import (
     FUNCTION_CLUSTREAM_VALUE_SPEC,
     FUNCTION_DFS_VALUE_SPEC,

@@ -15,9 +15,16 @@ services:
       - "8889:80"
     env_file:
       - ../env/.env
+    
+    networks:
+      - springhead_default
+      - function_default
+    
+    depends_on:
+      - postgres
   
   postgres:
-    image: postgres:latest
+    image: postgres:13.7
     environment:
       - POSTGRES_DB=${DEFAULT_DATABASE_DB}
       - POSTGRES_USER=${DEFAULT_DATABASE_USER}
@@ -26,3 +33,15 @@ services:
       - ../env/.env
     ports:
       - "${DEFAULT_DATABASE_PORT}:5432"
+
+    networks:
+      - springhead_default
+      - function_default
+  
+networks:
+  springhead_default:
+    external: true
+  
+  function_default:
+    external: true
+      

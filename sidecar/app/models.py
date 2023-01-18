@@ -30,7 +30,7 @@ class SpringheadTime:
     __tablename__ = "springhead_times"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    time_ns = Column(BigInteger, nullable=False, unique=True, index=True)
+    time_ns = Column(BigInteger, nullable=False, index=True)
     type_timer = Column(String(128), nullable=False)
     type_test_case = Column(String(128), nullable=False)
     timestamp = Column(DateTime(timezone=True), server_default=func.now())
@@ -42,7 +42,7 @@ class StatefunTime:
     __tablename__ = "statefun_times"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    time_ns = Column(BigInteger, nullable=False, unique=True, index=True)
+    time_ns = Column(BigInteger, nullable=False, index=True)
     type_timer = Column(String(128), nullable=False)
     type_test_case = Column(String(128), nullable=False)
     timestamp = Column(DateTime(timezone=True), server_default=func.now())

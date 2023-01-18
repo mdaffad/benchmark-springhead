@@ -22,6 +22,8 @@ export WORKER_CLASS=${WORKER_CLASS:-"uvicorn.workers.UvicornWorker"}
 
 # If there's a prestart.sh script in the /app/app directory
 # or other path specified, run it before starting
+sh scripts/init.sh
+
 PRE_START_PATH=${PRE_START_PATH:-/app/scripts/prestart.sh}
 echo "Checking for script in $PRE_START_PATH"
 if [ -f $PRE_START_PATH ] ; then
