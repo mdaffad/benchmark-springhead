@@ -2,10 +2,11 @@ import unicodedata
 
 import nltk
 from app.adapters.stateful_functions import stateful_functions
+from app.schemas import FUNCTION_TEXT_EGRESS_RECORD_TYPE
 from nltk.tokenize import word_tokenize
-from statefun import Context, Message, StringType, message_builder
+from statefun import Context, Message, StringType, kafka_egress_message
 
-from .typename import NORMALIZATION, TFIDF
+from .typename import NORMALIZATION
 
 stopwords = set(nltk.corpus.stopwords.words("english"))
 lemmatizer = nltk.stem.WordNetLemmatizer()
@@ -32,11 +33,11 @@ def normalize(context: Context, message: Message) -> None:
         if not is_punct(word) and not is_stopword(word)
     ]
     normalized_text = " ".join(normalized_text)
-    context.send(
-        message_builder(
-            target_typename=TFIDF,
-            target_id=context.address.id,
+    context.send_egress(
+        kafka_egress_message(
+            typename="function/kafka-egress",
+            topic="cluster",
             value=normalized_text,
-            value_type=StringType,
+            value_type=FUNCTION_TEXT_EGRESS_RECORD_TYPE,
         )
     )
